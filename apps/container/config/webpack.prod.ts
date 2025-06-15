@@ -4,6 +4,8 @@ import commonConfig from "./webpack.common";
 import { ModuleFederationPlugin } from "@module-federation/enhanced";
 import path from "path";
 
+const domain = process.env.PRODUCTION_URL;
+
 const prodConfig = (): Configuration => {
   const common = commonConfig();
   return merge(common, {
@@ -18,8 +20,8 @@ const prodConfig = (): Configuration => {
       new ModuleFederationPlugin({
         name: "container",
         remotes: {
-          cms: "cms@http://localhost:3002/remoteEntry.js",
-          crm: "crm@http://localhost:3001/remoteEntry.js",
+          cms: `cms@${domain}/cms/latest/remoteEntry.js`,
+          crm: `crm@${domain}/crm/latest/remoteEntry.js`,
         },
         shared: {
           react: { singleton: true, requiredVersion: false, eager: true },
