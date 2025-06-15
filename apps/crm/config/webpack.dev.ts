@@ -1,0 +1,53 @@
+import { merge } from "webpack-merge";
+import commonConfig from "./webpack.common";
+import { ModuleFederationPlugin } from "@module-federation/enhanced";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import type { Configuration } from "webpack";
+
+const devConfig = (): Configuration => {
+  const common = commonConfig();
+  return merge(common, {
+    mode: "development",
+    entry: "./src/index.ts",
+    output: {
+      publicPath: "http://localhost:3001/",
+    },
+    devtool: "cheap-module-source-map",
+    devServer: {
+      port: 3001,
+      historyApiFallback: {
+        index: "/index.html",
+      },
+    },
+    plugins: [
+      new ModuleFederationPlugin({
+        name: "crm",
+        filename: "remoteEntry.js",
+        exposes: {
+          "./CrmApp": "./src/bootstrap",
+        },
+        shared: {
+          react: { singleton: true, requiredVersion: false, eager: true },
+          "react-dom": { singleton: true, requiredVersion: false, eager: true },
+          "@mui/material": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+          "@emotion/react": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+          "@emotion/styled": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+        },
+      }),
+    ],
+  });
+};
+
+export default devConfig;

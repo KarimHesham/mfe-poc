@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@suite-poc/ui-kit": ["../../packages/ui-kit/src"],
+      "cms/*": ["../cms/src/*"],
+      "crm/*": ["../crm/src/*"]
+    }
+  },
+  "include": ["src", "config"]
+}
