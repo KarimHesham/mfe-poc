@@ -1,39 +1,54 @@
 import { merge } from "webpack-merge";
-import type { Configuration } from "webpack";
+import webpack, { type Configuration } from "webpack";
 import commonConfig from "./webpack.common";
 import { ModuleFederationPlugin } from "@module-federation/enhanced";
+import path from "path";
 
-const prodConfig = (): Configuration => ({
-  mode: "production",
-  devtool: "source-map",
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "container",
-      remotes: {
-        cms: "cms@http://localhost:3002/remoteEntry.js",
-        crm: "crm@http://localhost:3001/remoteEntry.js",
-      },
-      shared: {
-        react: { singleton: true, requiredVersion: false, eager: true },
-        "react-dom": { singleton: true, requiredVersion: false, eager: true },
-        "@mui/material": {
-          singleton: true,
-          requiredVersion: false,
-          eager: true,
+const prodConfig = (): Configuration => {
+  const common = commonConfig();
+  return merge(common, {
+    mode: "production",
+    devtool: "source-map",
+    entry: "./src/index.ts",
+    output: {
+      path: path.resolve(__dirname, "../dist"),
+      publicPath: "/container/latest/",
+    },
+    plugins: [
+      new ModuleFederationPlugin({
+        name: "container",
+        remotes: {
+          cms: "cms@http://localhost:3002/remoteEntry.js",
+          crm: "crm@http://localhost:3001/remoteEntry.js",
         },
-        "@emotion/react": {
-          singleton: true,
-          requiredVersion: false,
-          eager: true,
+        shared: {
+          react: { singleton: true, requiredVersion: false, eager: true },
+          "react-dom": { singleton: true, requiredVersion: false, eager: true },
+          "@mui/material": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+          "@emotion/react": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+          "@emotion/styled": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
         },
-        "@emotion/styled": {
-          singleton: true,
-          requiredVersion: false,
-          eager: true,
-        },
-      },
-    }),
-  ],
+      }),
+    ],
+  });
+};
+
+webpack(prodConfig(), (err, stats) => {
+  if (err || stats?.hasErrors()) {
+    console.error(err || stats?.toJson().errors);
+    process.exit(1);
+  }
+  console.log(stats?.toString({ colors: true }));
 });
-
-module.exports = merge(commonConfig, prodConfig);
