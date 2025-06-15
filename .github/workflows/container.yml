@@ -21,7 +21,7 @@ jobs:
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@latest --activate
 
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile --filter=container
       - run: pnpm build
         env:
           PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
