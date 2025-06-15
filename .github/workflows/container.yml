@@ -18,8 +18,8 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run build
+      - run: pnpm install
+      - run: pnpm build
         env:
           PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
 
