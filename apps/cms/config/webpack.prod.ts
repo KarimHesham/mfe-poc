@@ -1,7 +1,7 @@
 import { merge } from "webpack-merge";
 import type { Configuration } from "webpack";
 import { ModuleFederationPlugin } from "@module-federation/enhanced";
-import commonConfig from "config/webpack.common";
+import commonConfig from "./webpack.common";
 
 const prodConfig = (): Configuration => ({
   mode: "production",
