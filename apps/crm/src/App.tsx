@@ -1,7 +1,5 @@
-import React from "react";
-
 const App = () => {
-  return <div>CRM</div>;
+  return <h2>CRM Application</h2>;
 };
 
 export default App;

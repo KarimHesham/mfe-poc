@@ -6,7 +6,7 @@ const RemoteCrm = lazy(() => import("./components/CrmApp"));
 const App = () => {
   return (
     <div>
-      <h1>Container</h1>
+      <h1>Container Application</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <RemoteCms />
       </Suspense>
