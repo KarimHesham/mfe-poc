@@ -3,9 +3,6 @@ import Header from "./header";
 import Footer from "./footer";
 import Sidebar from "./sidebar";
 
-import styled from "@emotion/styled";
-console.log("👀 styled type:", typeof styled); // should be 'function'
-
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div
