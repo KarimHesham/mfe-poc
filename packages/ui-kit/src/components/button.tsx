@@ -1,3 +1,4 @@
+import { IconButton } from "@mui/material";
 export interface ButtonProps {
   buttonText: string;
   backgroundColor: string;
@@ -12,12 +13,18 @@ const Button = ({
   color,
 }: ButtonProps) => {
   return (
-    <div
+    <IconButton
       onClick={onClick}
-      style={{ backgroundColor, padding: "10px", cursor: "pointer", color }}
+      style={{
+        backgroundColor,
+        padding: "10px",
+        cursor: "pointer",
+        color,
+        borderRadius: "5px",
+      }}
     >
       {buttonText}
-    </div>
+    </IconButton>
   );
 };
 

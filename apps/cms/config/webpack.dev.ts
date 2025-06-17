@@ -29,21 +29,21 @@ const devConfig = (): Configuration => {
         shared: {
           react: { singleton: true, requiredVersion: false, eager: true },
           "react-dom": { singleton: true, requiredVersion: false, eager: true },
-          "@mui/material": {
-            singleton: true,
-            requiredVersion: false,
-            eager: true,
-          },
-          "@emotion/react": {
-            singleton: true,
-            requiredVersion: false,
-            eager: true,
-          },
-          "@emotion/styled": {
-            singleton: true,
-            requiredVersion: false,
-            eager: true,
-          },
+          // "@mui/material": {
+          //   singleton: true,
+          //   requiredVersion: false,
+          //   eager: true,
+          // },
+          // "@emotion/react": {
+          //   singleton: true,
+          //   requiredVersion: false,
+          //   eager: true,
+          // },
+          // "@emotion/styled": {
+          //   singleton: true,
+          //   requiredVersion: false,
+          //   eager: true,
+          // },
           "@suite-poc/ui-kit": {
             singleton: true,
             requiredVersion: false,
