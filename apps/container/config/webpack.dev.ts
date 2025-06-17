@@ -42,6 +42,11 @@ const devConfig = (): Configuration => {
             requiredVersion: false,
             eager: true,
           },
+          "@suite-poc/ui-kit": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
         },
       }),
     ],

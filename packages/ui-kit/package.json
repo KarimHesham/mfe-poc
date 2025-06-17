@@ -1,12 +1,14 @@
 {
-  "name": "ui-kit",
+  "name": "@suite-poc/ui-kit",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p tsconfig.json"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@mui/material": "^7.1.1"
+  }
 }
