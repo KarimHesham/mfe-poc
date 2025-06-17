@@ -8,13 +8,18 @@ import IndexRoute from "../components/routes";
 import CrmRoute from "../components/routes/crm";
 import CmsRoute from "../components/routes/cms";
 import Layout from "../components/layout";
+import { AppContextProvider } from "../components/context/app.context";
 
 const rootRoute = createRootRoute({
-  component: () => (
-    <Layout>
-      <Outlet />
-    </Layout>
-  ),
+  component: () => {
+    return (
+      <AppContextProvider>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </AppContextProvider>
+    );
+  },
 });
 
 const indexRoute = createRoute({

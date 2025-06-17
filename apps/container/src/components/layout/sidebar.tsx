@@ -6,17 +6,23 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
-import { Link, useRouter } from "@tanstack/react-router";
+import HomeIcon from "@mui/icons-material/Home";
+import { Link } from "@tanstack/react-router";
+import { useAppContext } from "../context/app.context";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
 
 const Sidebar = () => {
-  const router = useRouter();
-  const activePath = router.state.location.pathname;
+  const { activeApp } = useAppContext();
+
+  useEffect(() => {
+    console.log("sidebar activeApp", activeApp);
+  }, [activeApp]);
 
   const navItems = [
-    { label: "CRM", path: "/crm" },
-    { label: "CMS", path: "/cms" },
+    { label: "CRM", path: "/crm", icon: <HomeIcon />, app: "crm" },
+    { label: "CMS", path: "/cms", icon: <HomeIcon />, app: "cms" },
   ];
 
   return (
@@ -40,7 +46,7 @@ const Sidebar = () => {
             <ListItemButton
               component={Link}
               to={item.path}
-              selected={activePath === item.path}
+              selected={activeApp === item.app}
               sx={{
                 "&.Mui-selected": {
                   backgroundColor: "#334155",

@@ -1,6 +1,25 @@
 import { Button } from "@suite-poc/ui-kit";
+import { useCallback, useEffect } from "react";
 
-const App = () => {
+const App = ({
+  setActiveApp,
+  setAppName,
+}: {
+  setActiveApp?: (app: string) => void;
+  setAppName?: (app: string) => void;
+}) => {
+  useEffect(() => {
+    if (setActiveApp) {
+      setActiveApp("cms");
+    }
+  }, []);
+
+  const handleClick = useCallback(() => {
+    if (setAppName) {
+      setAppName("CMS");
+    }
+  }, [setAppName]);
+
   return (
     <div>
       <h2>CMS Application</h2>
@@ -8,7 +27,7 @@ const App = () => {
         buttonText="Click Me"
         backgroundColor="#6200ea"
         color="#fff"
-        onClick={() => alert("Button from CMS Application clicked!")}
+        onClick={handleClick}
       />
     </div>
   );

@@ -1,6 +1,25 @@
 import { Button } from "@suite-poc/ui-kit";
+import { useCallback, useEffect } from "react";
 
-const App = () => {
+const App = ({
+  setActiveApp,
+  setAppName,
+}: {
+  setActiveApp?: (app: string) => void;
+  setAppName?: (app: string) => void;
+}) => {
+  useEffect(() => {
+    if (setActiveApp) {
+      setActiveApp("crm");
+    }
+  }, []);
+
+  const handleClick = useCallback(() => {
+    if (setAppName) {
+      setAppName("CRM");
+    }
+  }, [setAppName]);
+
   return (
     <div>
       <h2>CRM Application</h2>
@@ -8,7 +27,7 @@ const App = () => {
         buttonText="Click Me"
         backgroundColor="#f44336"
         color="#ffffff"
-        onClick={() => alert("Button from CRM Application clicked!")}
+        onClick={handleClick}
       />
     </div>
   );

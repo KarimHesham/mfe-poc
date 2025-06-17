@@ -5,15 +5,16 @@ import Sidebar from "./sidebar";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-    >
-      <Header />
-      <div style={{ display: "flex", flex: 1 }}>
-        <Sidebar />
+    <div style={{ display: "flex", minHeight: "100vh" }}>
+      {/* Sidebar on the left */}
+      <Sidebar />
+
+      {/* Main content on the right (Header, Main, Footer) */}
+      <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+        <Header />
         <main style={{ flex: 1, padding: "1rem" }}>{children}</main>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
