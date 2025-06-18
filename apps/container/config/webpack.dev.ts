@@ -23,6 +23,7 @@ const devConfig = (): Configuration => {
         remotes: {
           crm: "crm@http://localhost:3001/remoteEntry.js",
           cms: "cms@http://localhost:3002/remoteEntry.js",
+          auth: "auth@http://localhost:3003/remoteEntry.js",
         },
         shared: {
           react: { singleton: true, requiredVersion: false, eager: true },

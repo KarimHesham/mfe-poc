@@ -19,3 +19,14 @@ declare module "cms/CmsApp" {
     }
   ) => void;
 }
+
+declare module "auth/AuthApp" {
+  export const mount: (
+    el: HTMLElement,
+    {
+      setActiveApp,
+    }: {
+      setActiveApp: (app: string) => void;
+    }
+  ) => void;
+}

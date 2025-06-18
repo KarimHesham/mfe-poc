@@ -7,6 +7,7 @@ import {
 import IndexRoute from "../components/routes";
 import CrmRoute from "../components/routes/crm";
 import CmsRoute from "../components/routes/cms";
+import AuthRoute from "../components/routes/auth";
 import Layout from "../components/layout";
 import { AppContextProvider } from "../context/app.context";
 
@@ -40,7 +41,18 @@ const cmsRoute = createRoute({
   component: () => <CmsRoute />,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, crmRoute, cmsRoute]);
+const authRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: () => <AuthRoute />,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  crmRoute,
+  cmsRoute,
+  authRoute,
+]);
 
 const router = createRouter({ routeTree });
 

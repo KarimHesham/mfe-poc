@@ -76,6 +76,16 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  apps/auth:
+    dependencies:
+      '@tanstack/react-router':
+        specifier: ^1.121.12
+        version: 1.121.21(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@24.0.3)(typescript@5.8.2)
+
   apps/cms:
     dependencies:
       '@tanstack/react-router':

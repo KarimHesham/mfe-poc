@@ -1,28 +1,30 @@
 import { merge } from "webpack-merge";
-import webpack, { type Configuration } from "webpack";
-import commonConfig from "./webpack.common";
 import { ModuleFederationPlugin } from "@module-federation/enhanced";
-import path from "path";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import type { Configuration } from "webpack";
+import commonConfig from "./webpack.common";
 
-const domain = process.env.PRODUCTION_URL;
-
-const prodConfig = (): Configuration => {
+const devConfig = (): Configuration => {
   const common = commonConfig();
   return merge(common, {
-    mode: "production",
-    devtool: "source-map",
+    mode: "development",
     entry: "./src/index.ts",
     output: {
-      path: path.resolve(__dirname, "../dist"),
-      publicPath: "/container/latest/",
+      publicPath: "http://localhost:3003/",
+    },
+    devtool: "cheap-module-source-map",
+    devServer: {
+      port: 3003,
+      historyApiFallback: {
+        index: "/index.html",
+      },
     },
     plugins: [
       new ModuleFederationPlugin({
-        name: "container",
-        remotes: {
-          cms: `cms@${domain}/cms/latest/remoteEntry.js`,
-          crm: `crm@${domain}/crm/latest/remoteEntry.js`,
-          auth: `auth@${domain}/auth/latest/remoteEntry.js`,
+        name: "auth",
+        filename: "remoteEntry.js",
+        exposes: {
+          "./AuthApp": "./src/bootstrap",
         },
         shared: {
           react: { singleton: true, requiredVersion: false, eager: true },
@@ -42,16 +44,15 @@ const prodConfig = (): Configuration => {
           //   requiredVersion: false,
           //   eager: true,
           // },
+          "@suite-poc/ui-kit": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
         },
       }),
     ],
   });
 };
 
-webpack(prodConfig(), (err, stats) => {
-  if (err || stats?.hasErrors()) {
-    console.error(err || stats?.toJson().errors);
-    process.exit(1);
-  }
-  console.log(stats?.toString({ colors: true }));
-});
+export default devConfig;
