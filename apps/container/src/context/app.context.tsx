@@ -29,6 +29,19 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     console.log("activeApp changed to", activeApp);
   }, [activeApp]);
 
+  useEffect(() => {
+    const handleSetAppName = (e: Event) => {
+      const customEvent = e as CustomEvent<{ appName: string }>;
+      setAppName(customEvent.detail.appName);
+    };
+
+    window.addEventListener("setAppName", handleSetAppName);
+
+    return () => {
+      window.removeEventListener("setAppName", handleSetAppName);
+    };
+  }, []);
+
   const contextValue = useMemo(
     () => ({ activeApp, setActiveApp, appName, setAppName }),
     [activeApp, appName]

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "@tanstack/react-router";
-import { useAppContext } from "../context/app.context";
+import { useAppContext } from "../../context/app.context";
 import { useEffect } from "react";
 
 const drawerWidth = 240;

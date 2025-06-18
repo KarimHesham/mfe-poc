@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import { Button } from "@suite-poc/ui-kit";
-import { useAppContext } from "../context/app.context";
+import { useAppContext } from "../../context/app.context";
 
 const Header = () => {
   const { appName } = useAppContext();

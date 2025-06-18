@@ -3,10 +3,8 @@ declare module "crm/CrmApp" {
     el: HTMLElement,
     {
       setActiveApp,
-      setAppName,
     }: {
       setActiveApp: (app: string) => void;
-      setAppName: (app: string) => void;
     }
   ) => void;
 }
@@ -16,10 +14,8 @@ declare module "cms/CmsApp" {
     el: HTMLElement,
     {
       setActiveApp,
-      setAppName,
     }: {
       setActiveApp: (app: string) => void;
-      setAppName: (app: string) => void;
     }
   ) => void;
 }

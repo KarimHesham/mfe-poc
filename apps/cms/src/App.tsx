@@ -1,13 +1,7 @@
 import { Button } from "@suite-poc/ui-kit";
 import { useCallback, useEffect } from "react";
 
-const App = ({
-  setActiveApp,
-  setAppName,
-}: {
-  setActiveApp?: (app: string) => void;
-  setAppName?: (app: string) => void;
-}) => {
+const App = ({ setActiveApp }: { setActiveApp?: (app: string) => void }) => {
   useEffect(() => {
     if (setActiveApp) {
       setActiveApp("cms");
@@ -15,10 +9,14 @@ const App = ({
   }, []);
 
   const handleClick = useCallback(() => {
-    if (setAppName) {
-      setAppName("CMS");
-    }
-  }, [setAppName]);
+    const event = new CustomEvent("setAppName", {
+      detail: {
+        appName: "CMS",
+      },
+    });
+
+    window.dispatchEvent(event);
+  }, []);
 
   return (
     <div>

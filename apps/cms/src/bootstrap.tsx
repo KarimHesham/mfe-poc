@@ -3,16 +3,10 @@ import App from "./App";
 
 const mount = (
   el: HTMLElement,
-  {
-    setActiveApp,
-    setAppName,
-  }: {
-    setActiveApp?: (app: string) => void;
-    setAppName?: (app: string) => void;
-  } = {}
+  { setActiveApp }: { setActiveApp?: (app: string) => void } = {}
 ) => {
   const root = createRoot(el);
-  root.render(<App setActiveApp={setActiveApp} setAppName={setAppName} />);
+  root.render(<App setActiveApp={setActiveApp} />);
 };
 
 if (process.env.NODE_ENV === "development") {

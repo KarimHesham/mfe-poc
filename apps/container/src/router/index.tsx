@@ -8,7 +8,7 @@ import IndexRoute from "../components/routes";
 import CrmRoute from "../components/routes/crm";
 import CmsRoute from "../components/routes/cms";
 import Layout from "../components/layout";
-import { AppContextProvider } from "../components/context/app.context";
+import { AppContextProvider } from "../context/app.context";
 
 const rootRoute = createRootRoute({
   component: () => {
